@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocker_Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page">
+        <!-- Nav bar -->
+        <header class="nav">
+            <div class="logo">
+                    <img src="./images/logo-stocker-pro.png" alt="logo">
+                    <span>Stocker_Pro</span>
+            </div>
+                <nav class="nav-links">
+                    <a href="#">Docs</a>
+                    <a href="#">Disclaimers</a>
+                </nav>
+        </header>
+
+        <!-- Main content -->
+        <main class="main">
+        <section class="card">
+            <div class="card-header">
+                <h1 class="card-title">Stock Analysis</h1>
+                <p class="card-subtitle">Enter up to 3 tickers for a comprehensive 3-day AI-powered report</p>
+            </div>
+
+            <form id="ticker-input-form">
+                <div class="ticker-input-container">
+                <input type ="text" palceholder="MSFT" id="ticker-input"/>
+                <button type="button" id="add-ticker-btn">
+                    <img src="./images/add.svg" alt="add-ticker" class="add-ticker-svg"/>
+                </button>
+                <ul id="tickers-list"></ul>
+                </div>
+                <button type="submit" class="btn-primary">Generate Report</button>
+            </form>
+
+            <div class="footer">
+                <div class="footer-item">
+                    <span class="footer-dot"></span>
+                    <span>3-Day Analysis Window</span>
+                </div>
+                <div class="footer-item">
+                    <span class="footer-dot"></span>
+                    <span>Real-time market Data</span>
+                </div>
+                <div class="footer-item">
+                    <span class="footer-dot"></span>
+                    <span>AI Insight Engine</span>
+                </div>
+            </div>
+        </section>
+    </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

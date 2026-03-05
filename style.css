@@ -1,0 +1,90 @@
+:root {
+    --bg-page: #f9fafb;
+    --bg-card: #ffffff;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border-subtle: #e5e7eb;
+    --btn-bg: #000000;
+    --btn-text: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+}
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 24px;
+}
+
+/* Top navigation */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1120px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo {
+    gap: 6px;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+}
+
+.logo img {
+    width: 38px;
+    height: 38px;
+}
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text-main);
+}
+
+.ticker-input-container {
+    display: flex;
+}
+.add-ticker-btn {
+    display: flex;
+    align-items: center;
+    font-size: 3em;
+    padding: 0 .35em;
+    cursor: pointer;
+    border: 2px solid;
+
+}
+.add-ticker-svg{
+    width: 12px;
+    height: 12px;
+}
