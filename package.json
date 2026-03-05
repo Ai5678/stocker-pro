@@ -1,0 +1,16 @@
+{
+  "name": "stocker_pro",
+  "version": "1.0.0",
+  "description": "AI-powered stock analysis",
+  "license": "ISC",
+  "author": "Narisara T.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  },
+  "devDependencies": {}
+}
