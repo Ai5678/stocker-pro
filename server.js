@@ -1,10 +1,21 @@
 import "dotenv/config";
 import {GoogleGenAI} from "@google/genai";
 
+function getDateRange(){
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 5)
+    return {
+        startDate: startDate.toISOString().split('T')[0], 
+        endDate: endDate.toISOString().split('T')[0]};
+}
+
 async function getStockData(ticker, startDate, endDate){
-    const url = `https://api.massive.com/v2/aggs/ticker/${ticker}/range/1/day/${startDate}/${endDate}?adjusted=true&sort=asc&limit=120&apiKey=${process.env.POLYGON_API_KEY}`;
+    const url = `https://api.massive.com/v2/aggs/ticker/${ticker}/range/1/day/${startDate}/${endDate}?adjusted=true&sort=desc&apiKey=${process.env.POLYGON_API_KEY}`;
     const response = await fetch(url);
-    return await response.json();
+    const data = await response.json();
+    data.results = data.results.slice(0, 3).reverse();
+    return data;
 }
 
 
@@ -26,4 +37,5 @@ async function handleGenerateReport(tickerArr, startDate, endDate){
     await generateReport(allData);
 }
 
-await handleGenerateReport(["MSFT", "AAPL", "GOOG"], "2026-03-01", "2026-03-05");
+const {startDate, endDate} = getDateRange();
+await handleGenerateReport(["META", "AAPL", "GOOG"], startDate, endDate);
