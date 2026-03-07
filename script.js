@@ -21,7 +21,7 @@ function addTicker(tickerArr){
 }
 
 function displayTickers(tickerArr){
-    tickersList.innerHTML = "Your tickers: " + tickerArr.map(ticker => `<li>${ticker}</li>`).join("");
+    tickersList.innerHTML = tickerArr.map(ticker => `<li>${ticker}</li>`).join("");
 }
 
 addTicker(tickerArr);

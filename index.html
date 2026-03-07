@@ -22,38 +22,40 @@
 
         <!-- Main content -->
         <main class="main">
-        <section class="card">
-            <div class="card-header">
+            <section class="card">
+            <div>
                 <h1 class="card-title">Stock Analysis</h1>
                 <p class="card-subtitle">Enter up to 3 tickers for a comprehensive 3-day AI-powered report</p>
             </div>
-
+            
             <form id="ticker-input-form">
                 <div class="ticker-input-container">
-                <input type ="text" palceholder="MSFT" id="ticker-input"/>
-                <button type="button" id="add-ticker-btn">
-                    <img src="./images/add.svg" alt="add-ticker" class="add-ticker-svg"/>
-                </button>
-                <ul id="tickers-list"></ul>
+                    <div class="input-row">
+                        <input type ="text" placeholder="MSFT" id="ticker-input"/>
+                        <button type="button" id="add-ticker-btn">
+                            <img src="./images/add.svg" alt="add-ticker" class="add-ticker-svg"/>
+                        </button>
+                    </div>
+                    <ul id="tickers-list"></ul>
                 </div>
-                <button type="submit" class="btn-primary">Generate Report</button>
+                <button type="submit" class="btn-primary">Generate Report →</button>
             </form>
+        </section>
 
             <div class="footer">
                 <div class="footer-item">
-                    <span class="footer-dot"></span>
-                    <span>3-Day Analysis Window</span>
+                    <span class="footer-icon">📆</span>
+                    <span class="footer-text">3-Day Analysis Window</span>
                 </div>
                 <div class="footer-item">
-                    <span class="footer-dot"></span>
-                    <span>Real-time market Data</span>
+                    <span class="footer-icon">⚡</span>
+                    <span class="footer-text">Real-time market Data</span>
                 </div>
                 <div class="footer-item">
-                    <span class="footer-dot"></span>
-                    <span>AI Insight Engine</span>
+                    <span class="footer-icon">✨</span>
+                    <span class="footer-text">AI Insight Engine</span>
                 </div>
             </div>
-        </section>
     </main>
     </div>
     <script src="script.js"></script>
