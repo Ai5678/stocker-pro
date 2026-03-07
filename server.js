@@ -1,5 +1,11 @@
 import "dotenv/config";
+import express from "express";
 import {GoogleGenAI} from "@google/genai";
+
+const app = express();
+app.use(express.json())
+app.use(express.static('.'))
+
 
 function getDateRange(){
     const endDate = new Date();
@@ -25,17 +31,25 @@ async function generateReport(data){
     console.log(prompt);
 
     const response = await genai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-2.5-flash",
         contents: prompt
     })
-
     console.log(response.text);
+    return response.text;
 }
 
-async function handleGenerateReport(tickerArr, startDate, endDate){
-    const allData = await Promise.all(tickerArr.map(ticker => getStockData(ticker, startDate, endDate)))
-    await generateReport(allData);
-}
+app.post("/report", async (req, res) => {
+    const tickerArr = req.body;
+    const {startDate, endDate} = getDateRange();
+    const allData = await Promise.all(tickerArr.map(ticker => getStockData(ticker, startDate, endDate)));
+    const report = await generateReport(allData);
+    res.json(report);
+})
 
-const {startDate, endDate} = getDateRange();
-await handleGenerateReport(["META", "AAPL", "GOOG"], startDate, endDate);
+app.listen(3000, (error) => {
+    if (!error) {
+        console.log("Server is running on port 3000");
+    } else {
+        console.log("Error: ", error);
+    }
+});
