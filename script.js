@@ -1,5 +1,4 @@
 const tickerArr = [];
-console.log(tickerArr);
 
 const tickerInput = document.getElementById("ticker-input")
 const addTickerBtn = document.getElementById("add-ticker-btn")
