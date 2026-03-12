@@ -9,6 +9,7 @@
     --btn-text: #ffffff;
     --err-text: #b91c1c;
     --err-bg: #fee2e2;
+
 }
 
 * {
@@ -30,7 +31,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 32px 24px;
+    align-items: center;
+    padding: 32px 16px;
 }
 
 /* Top navigation */
@@ -39,28 +41,29 @@ body {
     align-items: center;
     justify-content: space-between;
     max-width: 1120px;
-    margin: 0 auto;
+    margin: 0 auto 32px;
+    padding: 4px 8px;
     width: 100%;
 }
 
 .logo {
     gap: 6px;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     color: var(--text-main);
 }
 
 .logo img {
-    width: 38px;
-    height: 38px;
+    width: 45px;
+    height: 45px;
 }
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
-    font-size: 14px;
+    gap: 40px;
+    font-size: 18px;
 }
 
 .nav-links a {
@@ -93,7 +96,7 @@ body {
     width: 100%;
     max-width: 450px;
     min-height: 380px;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -227,6 +230,7 @@ body {
     gap: 24px;
     flex-wrap: wrap;
     justify-content: center;
+    padding-bottom: 8px;
 }
 
 .footer-item {
@@ -257,6 +261,7 @@ body {
     align-items: flex-start;
     justify-content: center;
     gap: 32px;
+    margin-bottom: 32px;
 }
 
 #tickers-subtitle {
@@ -278,8 +283,8 @@ body {
     justify-content: center;
     max-width: 1120px;
     width: 100%;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 /* Individual ticker card */
