@@ -40,9 +40,10 @@ generateReportBtn.addEventListener("click", async (e) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(tickerArr),
         });
-        const report = await response.json();
+        const {report, stockData} = await response.json();
         sessionStorage.setItem("report", report);
         sessionStorage.setItem("tickers", JSON.stringify(tickerArr));
+        sessionStorage.setItem("stockData", JSON.stringify(stockData));
         window.location.href = "/report.html";
     }
     catch(err){

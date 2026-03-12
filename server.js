@@ -42,7 +42,7 @@ app.post("/report", async (req, res) => {
     const {startDate, endDate} = getDateRange();
     const allData = await Promise.all(tickerArr.map(ticker => getStockData(ticker, startDate, endDate)));
     const report = await generateReport(allData);
-    res.json(report);
+    res.json({report, stockData: allData});
 })
 
 app.listen(3000, (error) => {
