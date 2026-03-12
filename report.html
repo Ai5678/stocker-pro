@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocker_Pro — Report</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page">
+        <header class="nav">
+            <div class="logo">
+                <img src="./images/logo-stocker-pro.png" alt="logo">
+                <span>Stocker_Pro</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#">Docs</a>
+                <a href="#">Disclaimers</a>
+            </nav>
+        </header>
+
+        <main class="main report">
+            <section class="ticker-cards-grid" id="ticker-cards"></section>
+            <section class="card-report">
+                <div>
+                    <h1 class="card-title">Analysis Report</h1>
+                    <p class="report-card-label">3-Day Historical Data</p>
+                    <p class="card-subtitle" id="tickers-subtitle"></p>
+                </div>
+                <p id="report-body"></p>
+            </section>
+            <a href="/" class="btn-primary report">← New Analysis</a>
+        </main>
+    </div>
+    <script src="report.js"></script>
+</body>
+</html>

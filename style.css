@@ -9,6 +9,7 @@
     --btn-text: #ffffff;
     --err-text: #b91c1c;
     --err-bg: #fee2e2;
+
 }
 
 * {
@@ -30,7 +31,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 32px 24px;
+    align-items: center;
+    padding: 32px 16px;
 }
 
 /* Top navigation */
@@ -39,28 +41,29 @@ body {
     align-items: center;
     justify-content: space-between;
     max-width: 1120px;
-    margin: 0 auto;
+    margin: 0 auto 32px;
+    padding: 4px 8px;
     width: 100%;
 }
 
 .logo {
     gap: 6px;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     color: var(--text-main);
 }
 
 .logo img {
-    width: 38px;
-    height: 38px;
+    width: 45px;
+    height: 45px;
 }
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
-    font-size: 14px;
+    gap: 40px;
+    font-size: 18px;
 }
 
 .nav-links a {
@@ -93,7 +96,7 @@ body {
     width: 100%;
     max-width: 450px;
     min-height: 380px;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -227,6 +230,7 @@ body {
     gap: 24px;
     flex-wrap: wrap;
     justify-content: center;
+    padding-bottom: 8px;
 }
 
 .footer-item {
@@ -242,4 +246,110 @@ body {
     height: 6px;
     border-radius: 50%;
     background-color: var(--text-muted);
+}
+
+/* Report page — wider, left-aligned card */
+.card-report {
+    background: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 8px 24px rgba(0, 0, 0, 0.06);
+    padding: 40px 32px;
+    width: 100%;
+    max-width: 1120px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+#tickers-subtitle {
+    text-align:left;
+}
+
+#report-body {
+    line-height: 1.7;
+    font-size: 15px;
+    color: var(--text-main);
+    white-space: pre-wrap;
+}
+
+/* Ticker cards grid */
+.ticker-cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    max-width: 1120px;
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+/* Individual ticker card */
+.ticker-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 8px 24px rgba(0, 0, 0, 0.06);
+    padding: 28px 24px;
+    flex: 1;
+    min-width: 240px;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ticker-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-main);
+}
+
+.report-card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+/* Ticker data table */
+.ticker-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.ticker-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.ticker-table td {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-main);
+}
+
+.ticker-table tr:last-child td {
+    border-bottom: none;
+}
+
+.ticker-table th:not(:first-child),
+.ticker-table td:not(:first-child) {
+    text-align: right;
+}
+
+.main.report .btn-primary{
+    width: auto;
+    padding: 18px 32px;
+    align-self: center;
 }
