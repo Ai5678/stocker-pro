@@ -10,12 +10,19 @@ const generateReportBtn = document.querySelector("#ticker-input-form button[type
 function addTicker(tickerArr){
     addTickerBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        if (tickerArr.length < 3){
-            const ticker = tickerInput.value.toUpperCase();
+        const ticker = tickerInput.value.trim().toUpperCase();
+
+        if (!ticker) {
+            tickersList.innerHTML = `<li class="error">Please enter a ticker symbol.</li>`;
+        } else if (!/^[A-Z]{1,5}$/.test(ticker)) {
+            tickersList.innerHTML = `<li class="error">Invalid ticker format (1–5 letters only).</li>`;
+        } else if (tickerArr.includes(ticker)) {
+            tickersList.innerHTML = `<li class="error">${ticker} is already added.</li>`;
+        } else if (tickerArr.length >= 3) {
+            tickersList.innerHTML = `<li class="error">You can only add up to 3 tickers.</li>`;
+        } else {
             tickerArr.push(ticker);
             displayTickers(tickerArr);
-        } else{
-            tickersList.innerHTML = `<li class="error">You can only add up to 3 tickers</li>`
         }
 
         tickerInput.value = "";
@@ -40,6 +47,10 @@ generateReportBtn.addEventListener("click", async (e) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(tickerArr),
         });
+        if (!response.ok) {
+            const {error} = await response.json();
+            throw new Error(error || "Server error.");
+        }
         const {report, stockData} = await response.json();
         sessionStorage.setItem("report", report);
         sessionStorage.setItem("tickers", JSON.stringify(tickerArr));
@@ -47,7 +58,7 @@ generateReportBtn.addEventListener("click", async (e) => {
         window.location.href = "/report.html";
     }
     catch(err){
-        tickersList.innerHTML = `<li class="error">Something went wrong. Please try again.</li>`;
+        tickersList.innerHTML = `<li class="error">${err.message}</li>`;
         console.error(err);
         generateReportBtn.textContent = "Generate Report →";
         generateReportBtn.disabled = false;
