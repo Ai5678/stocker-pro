@@ -2,6 +2,11 @@ import "dotenv/config";
 import express from "express";
 import {GoogleGenAI} from "@google/genai";
 
+if (!process.env.POLYGON_API_KEY || !process.env.GEMINI_API_KEY) {
+    console.error("Missing required API keys in .env");
+    process.exit(1);
+}
+
 const app = express();
 app.use(express.json())
 app.use(express.static('.'))

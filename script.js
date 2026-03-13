@@ -11,14 +11,17 @@ function addTicker(tickerArr){
     addTickerBtn.addEventListener("click", (e) => {
         e.preventDefault();
         const ticker = tickerInput.value.trim().toUpperCase();
-
+        // validate ticker input - empty
         if (!ticker) {
             tickersList.innerHTML = `<li class="error">Please enter a ticker symbol.</li>`;
-        } else if (!/^[A-Z]{1,5}$/.test(ticker)) {
+        } // validate ticker input - invalid format
+        else if (!/^[A-Z]{1,5}$/.test(ticker)) {
             tickersList.innerHTML = `<li class="error">Invalid ticker format (1–5 letters only).</li>`;
-        } else if (tickerArr.includes(ticker)) {
+        } // validate ticker input - duplicate
+        else if (tickerArr.includes(ticker)) {
             tickersList.innerHTML = `<li class="error">${ticker} is already added.</li>`;
-        } else if (tickerArr.length >= 3) {
+        } // validate ticker input - too many
+        else if (tickerArr.length >= 3) {
             tickersList.innerHTML = `<li class="error">You can only add up to 3 tickers.</li>`;
         } else {
             tickerArr.push(ticker);
