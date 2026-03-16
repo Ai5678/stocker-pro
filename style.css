@@ -117,6 +117,12 @@ a.logo {
     margin-bottom: 10px;
     text-align: center;
 }
+.card-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 300px;
+    text-align: center;
+}
 
 /* Form */
 #ticker-input-form {
@@ -205,7 +211,7 @@ a.logo {
 /* Generate Report button */
 .btn-primary {
     width: 100%;
-    padding: 10px 15px;
+    padding: 12px;
     background: var(--btn-bg);
     color: var(--btn-text);
     border: none;
