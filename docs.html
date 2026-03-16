@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocker_Pro — Docs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page">
+        <header class="nav">
+            <a href="/" class="logo">
+                <img src="./images/logo-stocker-pro.png" alt="logo">
+                <span>Stocker_Pro</span>
+            </a>
+            <nav class="nav-links">
+                <a href="docs.html">Docs</a>
+                <a href="disclaimers.html">Disclaimers</a>
+            </nav>
+        </header>
+
+        <main class="main docs">
+            <section class="card-report docs">
+
+                <!-- Header -->
+                <div class="docs-header">
+                    <p class="report-card-label">Reference</p>
+                    <h1 class="card-title">Documentation</h1>
+                </div>
+
+                <!-- About -->
+                <div class="docs-section">
+                    <h2>About StockerPro</h2>
+                    <p>StockerPro is an AI-powered stock analysis tool. Enter 1–3 US stock ticker symbols and it fetches the 3 most recent trading days of historical price data, then sends that data to Google Gemini to generate a plain-English report with a "BUY", "HOLD", or "SELL" recommendation for each ticker.</p>
+                    <p>It is intended as a quick starting point for research — not a trading platform or financial advisory service.</p>
+                </div>
+
+                <!-- Data Source -->
+                <div class="docs-section">
+                    <h2>Data Source — massive.com</h2>
+                    <p>Historical market data is retrieved from the <strong>massive.com Aggregates Bars (OHLC) API</strong>. Each request queries a 10-calendar-day lookback window to reliably capture 3 trading days, accounting for weekends and US market holidays. Attributes taken from API for analusis are: </p>
+
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Date <span class="tag">t</span></td>
+                                <td>Unix timestamp of the trading day (converted to readable date on screen)</td>
+                            </tr>
+                            <tr>
+                                <td>Open <span class="tag">o</span></td>
+                                <td>Opening price of the symbol on the given day</td>
+                            </tr>
+                            <tr>
+                                <td>High <span class="tag">h</span></td>
+                                <td>Highest traded price of the symbol on the given day</td>
+                            </tr>
+                            <tr>
+                                <td>Low <span class="tag">l</span></td>
+                                <td>Lowest traded price of the symbol on the given day</td>
+                            </tr>
+                            <tr>
+                                <td>Close <span class="tag">c</span></td>
+                                <td>Closing price of the symbol on the given day</td>
+                            </tr>
+                            <tr>
+                                <td>Volume <span class="tag">v</span></td>
+                                <td>Trading volume of the symbol on the given day</td>
+                            </tr>
+                            <tr>
+                                <td>Weighted Avg Volume <span class="tag">vw</span></td>
+                                <td>Volume-weighted average price</td>
+                            </tr>
+                            <tr>
+                                <td>Number of transactions <span class="tag">n</span></td>
+                                <td>Number of transactions of the symbol on the given day</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Data returned on the free tier may be <strong>delayed</strong> and does not reflect real-time prices.</p>
+                </div>
+
+                <!-- AI Analysis -->
+                <div class="docs-section">
+                    <h2>AI Analysis — Google Gemini</h2>
+                    <p>Once stock data is fetched, the entire dataset (all tickers, all 3 days) is passed to Google Gemini in a single prompt. The model is instructed to act as a trading analyst and produce a report of no more than 200 words, describing each stock's recent performance and recommending whether to buy, hold, or sell.</p>
+
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th>Detail</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Model</td>
+                                <td><span class="tag">gemini-2.5-flash</span> (subject to change)</td>
+                            </tr>
+                            <tr>
+                                <td>Library</td>
+                                <td><span class="tag">@google/genai</span></td>
+                            </tr>
+                            <tr>
+                                <td>Input</td>
+                                <td>3-day aggregate price data for all requested tickers</td>
+                            </tr>
+                            <tr>
+                                <td>Output</td>
+                                <td>Plain-text report and summary tables for each ticker displayed on the report page</td>
+                            </tr>
+                            <tr>
+                                <td>Max output length</td>
+                                <td>~200 words (instructed in prompt)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>The AI has no access to news, company fundamentals, earnings data, or broader market context beyond the 3-day price history provided.</p>
+                </div>
+
+                <!-- Limitations -->
+                <div class="docs-section">
+                    <h2>Limitations</h2>
+
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th>Limitation</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Massive free tier rate limit</td>
+                                <td>5 API calls per minute. This is why StockerPro caps input at 3 tickers per request — each ticker is one call.</td>
+                            </tr>
+                            <tr>
+                                <td>Gemini free tier rate limit</td>
+                                <td>The Gemini free tier throttles concurrent or high-frequency requests. If the analysis step fails or is slow, this is the likely cause.</td>
+                            </tr>
+                            <tr>
+                                <td>3-day data window only</td>
+                                <td>Analysis is based solely on 3 trading days of closing price and volume. No weekly, monthly, or fundamental data is considered.</td>
+                            </tr>
+                            <tr>
+                                <td>Delayed market data</td>
+                                <td>Massive's free tier provides delayed quotes, not real-time prices. Data shown may lag the live market.</td>
+                            </tr>
+                            <tr>
+                                <td>US tickers only</td>
+                                <td>The Massive endpoint used covers US exchange-listed equities. Tickers must be 1–5 uppercase letters (e.g. AAPL, MSFT, TSLA).</td>
+                            </tr>
+                            <tr>
+                                <td>Market hours</td>
+                                <td>Data updates only on US trading days. Requests made on weekends or holidays will reflect the most recent available session.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <a href="/" class="btn-primary">← Home</a>
+        </main>
+    </div>
+</body>
+</html>
