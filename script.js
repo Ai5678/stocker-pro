@@ -4,6 +4,8 @@ const tickerInput = document.getElementById("ticker-input")
 const addTickerBtn = document.getElementById("add-ticker-btn")
 const tickersList = document.getElementById("tickers-list")
 const generateReportBtn = document.querySelector("#ticker-input-form button[type='submit']")
+const spinner = document.getElementById("spinner")
+const form = document.getElementById("ticker-input-form")
 
 
 
@@ -42,8 +44,8 @@ generateReportBtn.addEventListener("click", async (e) => {
         tickersList.innerHTML = `<li class="error">Please add at least one ticker</li>`;
         return;
     }
-    generateReportBtn.textContent = "Generating...";
-    generateReportBtn.disabled = true;
+    form.classList.add("hidden");
+    spinner.classList.remove("hidden");
     try{
         const response = await fetch ("/report", {
             method: "POST",
@@ -61,10 +63,10 @@ generateReportBtn.addEventListener("click", async (e) => {
         window.location.href = "/report.html";
     }
     catch(err){
+        spinner.classList.add("hidden");
+        form.classList.remove("hidden");
         tickersList.innerHTML = `<li class="error">${err.message}</li>`;
         console.error(err);
-        generateReportBtn.textContent = "Generate Report →";
-        generateReportBtn.disabled = false;
     }
 })
 
