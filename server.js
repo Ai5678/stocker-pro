@@ -36,7 +36,6 @@ async function getStockData(ticker, startDate, endDate){
 async function generateReport(data){
     const genai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY});
     const prompt = `You are a trading guru. Given data on share prices over the past 3 days, write a report of no more than 200 words describing the stocks performance and recommending whether to buy, hold, or sell. \n${JSON.stringify(data, null, 2)}`;
-    console.log(prompt);
 
     const response = await genai.models.generateContent({
         model: "gemini-2.5-flash",
@@ -65,9 +64,10 @@ app.post("/report", async (req, res) => {
     }
 })
 
-app.listen(3000, (error) => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, (error) => {
     if (!error) {
-        console.log("Server is running on port 3000");
+        console.log(`Server is running on port ${PORT}`);
     } else {
         console.log("Error: ", error);
     }
