@@ -72,3 +72,5 @@ app.listen(PORT, (error) => {
         console.log("Error: ", error);
     }
 });
+
+export default app;
