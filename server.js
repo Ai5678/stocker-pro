@@ -3,6 +3,7 @@ import express from "express";
 import {GoogleGenAI} from "@google/genai";
 import { fileURLToPath } from "url";
 import path from "path";
+import { validateTickers } from "./lib/validation.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -51,12 +52,9 @@ async function generateReport(data){
 
 app.post("/report", async (req, res) => {
     const tickerArr = req.body;
-    if (!Array.isArray(tickerArr) || tickerArr.length === 0 || tickerArr.length > 3) {
-        return res.status(400).json({ error: "Provide 1 to 3 ticker symbols." });
-    }
-    const valid = tickerArr.every(t => typeof t === "string" && /^[A-Z]{1,5}$/.test(t));
-    if (!valid) {
-        return res.status(400).json({ error: "Invalid ticker format." });
+    const validationError = validateTickers(tickerArr);
+    if (validationError) {
+        return res.status(400).json({ error: validationError });
     }
     try{
         const {startDate, endDate} = getDateRange();
