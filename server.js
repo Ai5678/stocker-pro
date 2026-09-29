@@ -4,6 +4,7 @@ import {GoogleGenAI} from "@google/genai";
 import { fileURLToPath } from "url";
 import path from "path";
 import { validateTickers } from "./lib/validation.js";
+import { getDateRange, getStockData } from "./lib/marketData.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,27 +17,6 @@ if (!process.env.POLYGON_API_KEY || !process.env.GEMINI_API_KEY) {
 const app = express();
 app.use(express.json())
 app.use(express.static(__dirname))
-
-
-function getDateRange(){
-    const endDate = new Date();
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - 10)
-    return {
-        startDate: startDate.toISOString().split('T')[0], 
-        endDate: endDate.toISOString().split('T')[0]};
-}
-
-async function getStockData(ticker, startDate, endDate){
-    const url = `https://api.massive.com/v2/aggs/ticker/${ticker}/range/1/day/${startDate}/${endDate}?adjusted=true&sort=desc&apiKey=${process.env.POLYGON_API_KEY}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    if (!data.results || data.results.length === 0) {
-        throw new Error(`No data found for ticker: ${ticker}`);
-    }
-    data.results = data.results.slice(0, 3).reverse();
-    return data;
-}
 
 
 async function generateReport(data){
