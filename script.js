@@ -1,3 +1,5 @@
+import {validateTickerInput} from "./tickerValidation.js";
+
 const tickerArr = [];
 
 const tickerInput = document.getElementById("ticker-input")
@@ -8,32 +10,21 @@ const spinner = document.getElementById("spinner")
 const form = document.getElementById("ticker-input-form")
 
 
-
 function addTicker(tickerArr){
     addTickerBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        const ticker = tickerInput.value.trim().toUpperCase();
-        // validate ticker input - empty
-        if (!ticker) {
-            tickersList.innerHTML = `<li class="error">Please enter a ticker symbol.</li>`;
-        } // validate ticker input - invalid format
-        else if (!/^[A-Z]{1,5}$/.test(ticker)) {
-            tickersList.innerHTML = `<li class="error">Invalid ticker format (1–5 letters only).</li>`;
-        } // validate ticker input - duplicate
-        else if (tickerArr.includes(ticker)) {
-            tickersList.innerHTML = `<li class="error">${ticker} is already added.</li>`;
-        } // validate ticker input - too many
-        else if (tickerArr.length >= 3) {
-            tickersList.innerHTML = `<li class="error">You can only add up to 3 tickers.</li>`;
+        const {ticker, error} =
+        validateTickerInput(tickerInput.value, tickerArr);
+        if (error) {
+            tickersList.innerHTML = `<li class="error">${error}</li>`;
         } else {
             tickerArr.push(ticker);
-            displayTickers(tickerArr);
+displayTickers(tickerArr);
         }
-
-        tickerInput.value = "";
+            tickerInput.value = "";
     })
 }
-
+        
 function displayTickers(tickerArr){
     tickersList.innerHTML = tickerArr.map(ticker => `<li>${ticker}</li>`).join("");
 }
